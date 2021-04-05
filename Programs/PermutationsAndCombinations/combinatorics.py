@@ -155,3 +155,85 @@ for c in combinations_with_replacement("TBLE", 7):
 k = 15
 n = 4
 print(scipy.special.binom(k+(n-1), n-1))
+
+print("-------------------------------------")
+print("-------------------------------------")
+
+#Suppose there are 4 people and 9 different assignments. Each person should receive one assignment.
+# Assignments for different people should be different. How many ways are there to do it?
+#Total count of Possibilities
+print(math.factorial(9)/ (math.factorial(9 - 4)))
+
+#There are 4 people and 9 different assignments. We need to distribute all assignments among people. No assignment should be assigned to two people.
+#Every person can be given arbitrary number of assignments from 0 to 9. How many ways are there to do it?
+print(pow(4,9))
+
+#There are 15 identical candies. How many ways are there to distribute them among 7 kids? - combinations with repetitions
+k = 15
+n = 7
+print(scipy.special.binom(k+(n-1), n-1))
+
+#There are 15 identical candies. How many ways are there to distribute them among 7 kids in such a way that each kid receives at least 1 candy?
+
+# if received one candy each = 15 - 7 = 8candies left should be still distributed to 7 kids - combinations with repetitions
+k = 8
+n = 7
+print(scipy.special.binom(k+(n-1), n-1))
+
+#How many non-negative integer numbers are there below 10000 such that their sum of digits is equal to 9? - combinations with repetitions
+k = 9 # total 1 - 9 possible numbers
+n = 4 # below 10000 means just 4 positions in a number _ _ _ _
+print(scipy.special.binom(k+(n-1), n-1))
+
+# How many non-negative integer numbers are there below 10000 such that their sum of digits is equal to 10?
+# We can start similarly to the previous problem. There are four digits in the number and we split the weight 10 among them.
+# We can start with all digits being equal to 0 and then add 1 to one of them ten times in a row. So, each time we have to pick one of four digits.
+# These choices are unordered and the repetitions are allowed. So we are dealing with combinations of size 10 out of 4 options with repetitions and we have the formula for that.
+# This gives 286. But note that we have also counted cases where we place weight 10 into one digit and these cases do not correspond to 4-digit numbers.
+# There are four such cases and subtracting them from our intermediate result we obtain the answer to the problem.
+k = 10
+n = 4
+temp = scipy.special.binom(k+(n-1), n-1)
+print(temp - 4) # here in each of the 4 positions. number 10 is not allowed anywhere
+
+#How many four-digit numbers are there such that their digits are non-increasing, that is each next digit is not greater than the previous one?
+# Three-digit numbers are also four-digit, they just start with 0.
+#To fix such a number it is sufficient and enough to pick unordered subset of four numbers from 0 to 9.
+# Then they can be ordered into a non-increasing order in a unique way. Since there might be equal digits in our number, repetitions are allowed.
+# Thus we are dealing with combinations of size 4 out of 10 options with repetitions.
+k = 4
+n = 10
+print(scipy.special.binom(k+(n-1), n-1))
+
+#There are 12 students in the class. How many ways are there to split them into working groups of size 2 to work on the same assignment?
+# we have to divide the extra count we done in the end of solution. we counted each splitting 6! times for each permutation of 6 groups
+temp = scipy.special.binom(12, 2) * scipy.special.binom(10, 2) * scipy.special.binom(8, 2) * scipy.special.binom(6, 2) * scipy.special.binom(4, 2)  * scipy.special.binom(2, 2)
+print(temp / math.factorial(6))
+
+#Question 1
+#We have a dataset of size 8 and we want to separate a subset of size 3 from it. How many ways do we have to do it?
+k = 8
+n = 3
+print(scipy.special.binom(k, n))
+
+#We have two disjoint datasets, of size 8 and 5 respectively.
+#We would like to move three objects from the first dataset to the second and simultaneously move two objects from the second dataset to the first one. How many ways do we have to do it?
+print(scipy.special.binom(8, 3) * scipy.special.binom(5, 2))
+
+#In a 6 number lottery one is trying to guess an unordered subset of 6 numbers among 44 numbers without repetitions.
+# For this one picks 6 numbers out of 44 himself. How many ways are there to do this? You can use wolfram alpha to compute the exact number.
+k = 44
+n = 6
+print(scipy.special.binom(k, n))
+
+#In a 6 number lottery one is trying to guess an unordered subset of 6 numbers among 44 numbers without repetitions.
+# After the lottery the organisers decided to count how many possible ways are there to guess correctly exactly four numbers.
+#What is the answer to this question? You can use wolfram alpha to compute the exact number.
+
+#Answer: Something is wrong. Note that the lottery has already happened, so the set of winning numbers is fixed.
+# So to guess exactly four winning numbers one has to pick four numbers among 6 winning numbers and pick two other numbers among remaining 44-6=38 numbers.
+# Both of these are combinations and we know how to compute them. Then by the product rule we have to multiply the results to obtain the resulting number of possibilities.
+print(scipy.special.binom(6, 4) * scipy.special.binom(38, 2))
+
+print(math.factorial(5)/ (math.factorial(5 - 2)))
+
